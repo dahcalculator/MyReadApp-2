@@ -5,9 +5,6 @@ import Wantoread from './Wantoread'
 import Currentlyreading from './Currentlyreading'
 import Read from './Read'
 
-
-
-
 class Main extends React.Component {
   state = {
     books: [],
@@ -41,8 +38,7 @@ class Main extends React.Component {
       }));
   
     }   
-      })
-    
+    }) 
   .catch((err) => {
     console.log(err);
     this.setState({ error: true });

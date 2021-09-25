@@ -16,16 +16,20 @@ class Read extends Component {
                 {
                   this.props.books
                     .filter((book) => book.shelf === 'read')
-                    .map((book) => (
-                      <li  key={book.id}>
+                    .map((book) => {
+                      let shelf = "read";
+                      return (
+                        <li  key={book.id}>
                       <Book
                         book={book}
                           updateShelf={this.props.updateShelf}
-                          shelfInfo={book.shelf}
-                      
+                          shelfInfo={shelf}
                       />
                       </li>
-                  ))
+                      )
+                    }
+                      
+                  )
                 }     
                      
                     </ol>

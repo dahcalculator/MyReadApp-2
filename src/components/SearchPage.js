@@ -8,7 +8,8 @@ export class SearchPage extends Component {
       books: [],
       searchedBook: [],
       error: false,
-      query: ""
+      query: "",
+      shelf: []
     }
   
   componentDidMount() {
@@ -39,16 +40,6 @@ export class SearchPage extends Component {
               error: true
             });
           } else {
-            if (searchedBook[0]) {
-              this.state.searchedBook.forEach((s) => {
-                this.props.books.forEach((b) => {
-                  if (b.id === s.id) {
-                    s.shelf = b.shelf
-                  }; 
-                });
-              });
-              
-            }
             this.setState({ searchedBook: searchedBook });
           } 
         });
@@ -72,7 +63,6 @@ export class SearchPage extends Component {
       }));
     } 
   }
- 
 
   render() {
   
@@ -94,17 +84,27 @@ export class SearchPage extends Component {
             </div>
           </div>
           <div className="search-books-results">
-            <ol className="books-grid">
-              {this.state.searchedBook.map((book) => 
+            <ol className="books-grid"
+            
+            >
+              {this.state.searchedBook.map((book) => {
+                let shelf = "none"
+                this.state.books.map((b) => 
+                   (book.id === b.id) ?
+                  (shelf = b.shelf) :
+                    ""  
+                );
+                 return (
                   <li key={book.id}>
                   <Book
                     book={book}
                     updateShelf={this.updateShelf}
-                    shelfInfo={book.shelf}
+                    shelfInfo={shelf}
+                   
                     />
                     </li>
                 )
-              }
+              })}
             </ol>
           </div>
         </div>
